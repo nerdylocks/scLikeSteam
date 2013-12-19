@@ -1,4 +1,15 @@
 <div class="jumbotron">
-<p>Following: {{User.followings_count}}</p>
-<p>Followers: {{User.followers_count}}</p>
+<h2 ng-hide="User">Please <a href="#" ng-click="LogIn()">login</a> to your Soundcloud account</h2>
+<div ng-show="User">
+    <p>Following: {{User.followings_count}}</p>
+    <p>Followers: {{User.followers_count}}</p>
+    <ul class="list-group" >
+        <li class="list-group-item clear" style="display: block; text-align: left;" ng-repeat="dj in followers">
+            <a href="{{dj.permalink_url}}">
+                <img height="60px" style="margin-right: 30px;" class="img-rounded" src="{{dj.avatar_url}}" alt="...">
+            </a>
+            <a href="{{dj.permalink_url}}">{{dj.username}}</a>
+        </li>
+    </ul>
+    </div>
 </div>
