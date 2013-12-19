@@ -1,15 +1,25 @@
-<div class="jumbotron">
-<h2 ng-hide="User">Please <a href="#" ng-click="LogIn()">login</a> to your Soundcloud account</h2>
-<div ng-show="User">
-    <p>Following: {{User.followings_count}}</p>
-    <p>Followers: {{User.followers_count}}</p>
-    <ul class="list-group" >
-        <li class="list-group-item clear" style="display: block; text-align: left;" ng-repeat="dj in followers">
-            <a href="{{dj.permalink_url}}">
-                <img height="60px" style="margin-right: 30px;" class="img-rounded" src="{{dj.avatar_url}}" alt="...">
-            </a>
-            <a href="{{dj.permalink_url}}">{{dj.username}}</a>
-        </li>
-    </ul>
+<div class="col-md-4">
+    <div ng-show="User">
+        <fieldset>
+            <input type="search" ng-model="search" class="form-control" placeholder="Search">
+        </fieldset>
+        <br/>
+        <ul class="list-group">
+            <li  ng-click="getLikes(dj.id)" class="list-group-item clear" style="display: block; text-align: left;" ng-repeat="dj in followers | filter:search">
+                <a href="{{dj.permalink_url}}">
+                    <img height="60px" style="margin-right: 30px;" class="img-rounded" src="{{dj.avatar_url}}" alt="...">
+                </a>
+                <a>{{dj.username}}</a>
+                <span class="badge">{{dj.followers_count}}</span>
+            </li>
+        </ul>
     </div>
 </div>
+<div class="col-md-8">
+    <ul class="list-group">
+        <li class="list-group-item" ng-repeat="fav in favs">
+            <a href="{{fav.permalink_url}}">{{fav.uri}}</a>
+        </li>
+    </ul>
+</div>
+

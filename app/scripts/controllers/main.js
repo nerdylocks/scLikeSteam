@@ -16,7 +16,6 @@ LikeStream.controller('UserMgmt', function($scope, $rootScope, $http, $browser, 
                 // Get access token, store it in cookies
                 $cookies.access_token = result.access_token;
                 $rootScope.GetUserProfile(result.access_token);
-
             }
         });
     }
@@ -36,8 +35,6 @@ LikeStream.controller('UserMgmt', function($scope, $rootScope, $http, $browser, 
         });
     }
 
-
-
     $rootScope.User =  $cookieStore.get($cookies.access_token);
     console.log($rootScope.User);
     console.log($cookies.access_token);
@@ -48,11 +45,15 @@ LikeStream.controller('MainCtrl', function ($scope, $http, $rootScope, $cookies,
             $scope.followers = data;
         });
     }
-
-    //console.log($rootScope.User.uri);
+    $scope.getLikes = function(user_id){
+        $http.get('https://api.soundcloud.com/users/' + user_id + '/favorites.json?oauth_token=' + $cookies.access_token).success(function(data){
+            $scope.favs = data;
+        });
+    }
 });
 
-LikeStream.controller('LoggedIn', function ($scope) {
-    $scope.loggedin = "Welcome!"
+LikeStream.controller('Likes', function ($scope, $rootScope,$routeParams, $http, $cookies) {
+    if($rootScope.User){
 
+    }
 });

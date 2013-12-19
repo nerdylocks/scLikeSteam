@@ -12,9 +12,9 @@ LikeStream.config(function ($routeProvider) {
         templateUrl: 'views/main.html',
         controller: 'MainCtrl'
       })
-      .when('/logged-in', {
-        templateUrl: 'views/loggedin.html',
-        controller: 'LoggedIn'
+      .when('/likes/:id', {
+        templateUrl: 'views/likes.html',
+        controller: 'Likes'
       })
       .otherwise({
         redirectTo: '/'
