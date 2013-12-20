@@ -1,0 +1,95 @@
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+
+    <!-- build:css({.tmp,app}) styles/main.css -->
+    <link rel="stylesheet" href="styles/bootstrap.css">
+    <link rel="stylesheet" href="styles/main.css">
+    <!-- endbuild -->
+    <style>
+        .list-group-item {
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body ng-app="scLikeStreamApp" ng-cloak>
+<!--[if lt IE 7]>
+
+<![endif]-->
+
+<!--[if lt IE 9]>
+<script src="bower_components/es5-shim/es5-shim.js"></script>
+<script src="bower_components/json3/lib/json3.min.js"></script>
+<![endif]-->
+
+<!-- Add your site or application content here -->
+<header ng-controller="UserMgmt">
+    <div class="container">
+        <ul class="nav nav-pills pull-right">
+            <li class="active"><a ng-href="#" ng-click="LogIn()"><span ng-hide="User">Login</span>{{User.full_name}}</a></li>
+            <li><a ng-href="#" ng-click="LogOut()">Logout</a></li>
+        </ul>
+        <h3 class="text-muted">Soundthunder?</h3>
+    </div>
+
+</header>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <p ng-show="User">You are following {{User.followings_count}} people and have {{User.followers_count}} followers, good on ya!</p>
+            <h2 ng-hide="User"><a href="#" ng-click="LogIn()">Login</a> to you Soundcloud account to see what your favorite DJ's are listening to!</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div ng-view>
+
+        </div>
+    </div>
+</div>
+
+<!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
+<script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-XXXXX-X');
+    ga('send', 'pageview');
+</script>
+
+<script src="bower_components/jquery/jquery.js"></script>
+<script src="bower_components/angular/angular.js"></script>
+
+<!-- build:js scripts/plugins.js -->
+
+<!-- endbuild -->
+<!-- soundcloud sdk -->
+
+
+<!-- end soundcloud -->
+<!-- build:js scripts/modules.js -->
+<script src="bower_components/oauth/oauth.js"></script>
+<script src="bower_components/angular-resource/angular-resource.js"></script>
+<script src="bower_components/angular-cookies/angular-cookies.js"></script>
+<script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+<script src="bower_components/angular-route/angular-route.js"></script>
+<!-- endbuild -->
+<script src="bower_components/api/sc_api.js"></script>
+<script src="scripts/widget.js"></script>
+<!-- build:js({.tmp,app}) scripts/scripts.js -->
+<script src="scripts/app.js"></script>
+<script src="scripts/controllers/main.js"></script>
+
+<!-- endbuild -->
+</body>
+</html>
