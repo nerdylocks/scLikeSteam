@@ -1,6 +1,6 @@
 'use strict';
 
-LikeStream.controller('UserMgmt', function($scope, $rootScope, $route, $http, $browser, $cookies, $cookieStore){
+LikeStream.controller('UserMgmt', function($scope, $rootScope, $route, $http, $route, $cookies, $cookieStore){
     OAuth.initialize('bKANLpsjGu9trGEcW-ZxuFpbkiM');
 
     var API_ENDPOINT = 'https://api.soundcloud.com/';
@@ -23,7 +23,8 @@ LikeStream.controller('UserMgmt', function($scope, $rootScope, $route, $http, $b
     $rootScope.LogOut = function(){
         $cookieStore.remove($cookies.access_token);
         $cookieStore.remove("access_token");
-        window.location = 'http://nerdylocks.github.io/scLikeSteam/app';
+        $rootScope.User = "";
+        $route.reload();
     }
 
     $rootScope.GetUserProfile = function(access_token){
@@ -31,7 +32,7 @@ LikeStream.controller('UserMgmt', function($scope, $rootScope, $route, $http, $b
             $cookieStore.put(access_token, data);
             $rootScope.User = $cookieStore.get(access_token);
             console.log($rootScope.User);
-            window.location = 'http://nerdylocks.github.io/scLikeSteam/app';
+            $route.reload();
         });
     }
 
