@@ -23,6 +23,7 @@ LikeStream.controller('UserMgmt', function($scope, $rootScope, $http, $route, $c
     $rootScope.LogOut = function(){
         $cookieStore.remove($cookies.access_token);
         $cookieStore.remove("access_token");
+        $rootScope.User = "";
         $route.reload();
     }
 
@@ -41,7 +42,7 @@ LikeStream.controller('UserMgmt', function($scope, $rootScope, $http, $route, $c
 LikeStream.controller('MainCtrl', function ($scope, $http, $rootScope, $cookies, $cookieStore) {
 
     var widgetIframe = document.getElementById('sc-widget'),
-        widget       = SC.Widget(widgetIframe),
+        widget       = SC.Widget(widgetIframe);
 
     if($rootScope.User){
         $http.get($rootScope.User.uri + '/followings.json?oauth_token=' + $cookies.access_token).success(function(data){
