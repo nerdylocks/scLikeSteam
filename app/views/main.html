@@ -5,8 +5,8 @@
         </fieldset>
         <br/>
         <ul class="list-group">
-            <li  ng-click="getLikes(dj.id)" class="list-group-item clear" style="display: block; text-align: left;" ng-repeat="dj in followers | filter:search">
-                <a href="{{dj.permalink_url}}">
+            <li  ng-click="getLikes(dj.id)" ng-class="" class="active list-group-item clear" style="display: block; text-align: left;" ng-repeat="dj in followers | filter:search">
+                <a href="{{dj.permalink_url}}" class="active">
                     <img height="60px" style="margin-right: 30px;" class="img-rounded" src="{{dj.avatar_url}}" alt="...">
                 </a>
                 <a>{{dj.username}}</a>
@@ -16,10 +16,11 @@
     </div>
 </div>
 <div class="col-md-8">
+    <iframe id="sc-widget" ng-show="User" src="http://w.soundcloud.com/player/?url=https://api.soundcloud.com/tracks/124634827&amp;color=ff6600&amp;auto_play=false&amp;show_artwork=false" width="100%" height="166" scrolling="no" frameborder="no" ></iframe>
     <ul class="list-group">
-        <li class="list-group-item" ng-repeat="fav in favs">
-            <a href="{{fav.permalink_url}}">{{fav.uri}}</a>
-        </li>
+        <a ng-click="togglePlay(fav.uri)" ng-class="isActive(this)" class="list-group-item" ng-repeat="fav in favs">
+            <span>{{fav.title}}</span>
+        </a>
     </ul>
 </div>
 

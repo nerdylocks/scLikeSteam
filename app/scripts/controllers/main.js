@@ -37,9 +37,14 @@ LikeStream.controller('UserMgmt', function($scope, $rootScope, $http, $browser, 
 
     $rootScope.User =  $cookieStore.get($cookies.access_token);
     console.log($rootScope.User);
-    console.log($cookies.access_token);
 });
 LikeStream.controller('MainCtrl', function ($scope, $http, $rootScope, $cookies, $cookieStore) {
+
+    var widgetIframe = document.getElementById('sc-widget'),
+        widget       = SC.Widget(widgetIframe),
+        CLIENT_ID = 'e979f6f05bd2c8690d3c1d3e4f526d00';
+
+
     if($rootScope.User){
         $http.get($rootScope.User.uri + '/followings.json?oauth_token=' + $cookies.access_token).success(function(data){
             $scope.followers = data;
@@ -50,6 +55,22 @@ LikeStream.controller('MainCtrl', function ($scope, $http, $rootScope, $cookies,
             $scope.favs = data;
         });
     }
+    
+    $scope.togglePlay = function(track){
+
+        widget.load(track, {
+            show_artwork: false,
+            auto_play:true,
+            show_comments:false,
+            buying:false,
+            liking:false,
+            sharing:false,
+            show_playcount:false,
+            show_user:false,
+        });
+
+    }
+
 });
 
 LikeStream.controller('Likes', function ($scope, $rootScope,$routeParams, $http, $cookies) {
