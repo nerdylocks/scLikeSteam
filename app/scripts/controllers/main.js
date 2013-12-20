@@ -42,8 +42,6 @@ LikeStream.controller('MainCtrl', function ($scope, $http, $rootScope, $cookies,
 
     var widgetIframe = document.getElementById('sc-widget'),
         widget       = SC.Widget(widgetIframe),
-        CLIENT_ID = 'e979f6f05bd2c8690d3c1d3e4f526d00';
-
 
     if($rootScope.User){
         $http.get($rootScope.User.uri + '/followings.json?oauth_token=' + $cookies.access_token).success(function(data){
