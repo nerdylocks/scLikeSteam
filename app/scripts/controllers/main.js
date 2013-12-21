@@ -1,5 +1,3 @@
-'use strict';
-
 LikeStream.controller('UserMgmt', function($scope, $rootScope, $route, $http, $route, $cookies, $cookieStore){
     OAuth.initialize('bKANLpsjGu9trGEcW-ZxuFpbkiM');
 
