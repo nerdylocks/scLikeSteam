@@ -1,1 +1,0 @@
-jQuery.support.cors = true;

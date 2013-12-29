@@ -3,7 +3,7 @@
 LikeStream.controller('UserMgmt', function($scope, $rootScope, $route, $http, $browser, $cookies, $cookieStore){
     OAuth.initialize('bKANLpsjGu9trGEcW-ZxuFpbkiM');
 
-    var API_ENDPOINT = 'https://api.soundcloud.com/';
+    $rootScope.API_ENDPOINT = 'https://api.soundcloud.com/';
     var me = 'me.json?oauth_token=';
     var users = 'ueser?oauth_token=';
 
@@ -23,20 +23,43 @@ LikeStream.controller('UserMgmt', function($scope, $rootScope, $route, $http, $b
     $rootScope.LogOut = function(){
         $cookieStore.remove($cookies.access_token);
         $cookieStore.remove("access_token");
+<<<<<<< HEAD
         window.location = 'http://nerdylocks.github.io/scLikeSteam/app';
+=======
+        $rootScope.User = "";
+        $route.reload();
+>>>>>>> master
     }
 
     $rootScope.GetUserProfile = function(access_token){
-        $http.get(API_ENDPOINT + me + access_token).success(function(data){
+        $http.get($rootScope.API_ENDPOINT + 'me.json?oauth_token=' + access_token).success(function(data){
             $cookieStore.put(access_token, data);
             $rootScope.User = $cookieStore.get(access_token);
+<<<<<<< HEAD
             console.log($rootScope.User);
             window.location = 'http://nerdylocks.github.io/scLikeSteam/app';
+=======
+
+            $route.reload();
+>>>>>>> master
         });
     }
+    $rootScope.following = [];
+    $scope.getMyFollingsIds = function(userId){
+        $http.get($rootScope.API_ENDPOINT + 'users/' + userId + '/followings.json?oauth_token=' + $cookies.access_token).success(function(data){
+            //angular.forEach(data, function(key, value){
+                $rootScope.following = data.id;
+                console.log($rootScope.following);
 
+            //});
+        });
+    }
     $rootScope.User =  $cookieStore.get($cookies.access_token);
     console.log($rootScope.User);
+    $scope.getMyFollingsIds($rootScope.User);
+
+
+
 });
 LikeStream.controller('MainCtrl', function ($scope, $http, $rootScope, $cookies, $cookieStore) {
 
@@ -48,12 +71,41 @@ LikeStream.controller('MainCtrl', function ($scope, $http, $rootScope, $cookies,
             $scope.followers = data;
         });
     }
+    $scope.favs;
     $scope.getLikes = function(user_id){
-        $http.get('https://api.soundcloud.com/users/' + user_id + '/favorites.json?oauth_token=' + $cookies.access_token).success(function(data){
+        $http.get($rootScope.API_ENDPOINT + 'users/' + user_id + '/favorites.json?oauth_token=' + $cookies.access_token).success(function(data){
             $scope.favs = data;
+            console.log($scope.favs);
+            $scope.checkFollowing();
         });
     }
-    
+
+    $scope.Follow = function(userId){
+        $http.put($rootScope.API_ENDPOINT + 'me/followings/' + userId + '?oauth_token=' + $cookies.access_token).success(function(data){
+            console.log(data);
+            alert('Following ' + userId);
+
+        });
+    }
+
+    $scope.checkFollowing = function(userId){
+        angular.forEach($scope.favs, function(key, value){
+            if(key.id = userId){
+                console.log('match found ', userId, key.id = userId);
+            }
+        });
+
+    }
+    $scope.isLiked = 'liked-false';
+    $scope.Like = function(trackId){
+        $http.put($rootScope.API_ENDPOINT + 'me/favorites/' + trackId + '?oauth_token=' + $cookies.access_token).success(function(data){
+            if(data.status == "201 - Created"){
+                $scope.favs[trackId].user_favorite = true;
+            }
+
+        });
+    }
+
     $scope.togglePlay = function(track){
 
         widget.load(track, {

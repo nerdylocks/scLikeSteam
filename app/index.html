@@ -19,6 +19,12 @@
         .list-group-item {
             cursor: pointer;
         }
+        .liked-true {
+            color: orange;
+        }
+        .liked-false {
+            color: #cccccc;
+        }
     </style>
 </head>
 <body ng-app="scLikeStreamApp" ng-cloak>
@@ -35,10 +41,11 @@
 <header ng-controller="UserMgmt">
     <div class="container">
         <ul class="nav nav-pills pull-right">
+            <li><a style="padding: 0; margin: -5px 15px 0 0" href="#"><img class="img-circle" width="50" src="{{User.avatar_url}}" alt=""/></a></li>
             <li class="active"><a ng-href="#" ng-click="LogIn()"><span ng-hide="User">Login</span>{{User.full_name}}</a></li>
             <li><a ng-href="#" ng-click="LogOut()">Logout</a></li>
         </ul>
-        <h3 class="text-muted">Soundthunder?</h3>
+        <h3 class="text-muted">Sound Tornado</h3>
     </div>
 
 </header>
@@ -84,7 +91,12 @@
 <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
 <script src="bower_components/angular-route/angular-route.js"></script>
 <!-- endbuild -->
+<<<<<<< HEAD
 <script src="bower_components/api/sc_api.js"></script>
+=======
+<script src="http://connect.soundcloud.com/sdk.js"></script>
+<script src="scripts/sc_api.js"></script>
+>>>>>>> master
 <script src="scripts/widget.js"></script>
 <!-- build:js({.tmp,app}) scripts/scripts.js -->
 <script src="scripts/app.js"></script>
